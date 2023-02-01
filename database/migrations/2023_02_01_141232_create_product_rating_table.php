@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_rating', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamp('date_and_time');
             $table->foreignId('user');
             $table->foreignId('product');
             $table->integer('rating');
