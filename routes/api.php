@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductRatingController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//javne rute
+
+Route::resource('products', ProductController::class)->only(['index', 'show']);
+
+Route::resource('providers', ProviderController::class);
+
+Route::resource('apprat', ProductRatingController::class);
