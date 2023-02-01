@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,5 @@ Route::resource('products', ProductController::class)->only(['index', 'show']);
 Route::resource('providers', ProviderController::class);
 
 Route::resource('apprat', ProductRatingController::class);
+
+Route::resource('users', UserController::class)->only(['index', 'show']);
