@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddColumnEmailToProviderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_rating', function (Blueprint $table) {
-            $table->foreignId('provider');           
+        Schema::table('provider', function (Blueprint $table) {
+            $table->string('email');
         });
     }
 
@@ -25,11 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_rating', function(Blueprint $table){
-            $table->dropForeign('provider');
-
+        Schema::table('provider', function (Blueprint $table) {
+            $table->dropColumn('email');
         });
     }
-};
-
-?>
+}

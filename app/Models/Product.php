@@ -10,15 +10,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'product';
     public $primaryKey = 'id';
     public function productRating(){
         return $this->hasMany(ProductRating::Class);
     }
     protected $fillable = [
         'name',
-        'slug',
-        'description',
-        'price'
     ];
 } 

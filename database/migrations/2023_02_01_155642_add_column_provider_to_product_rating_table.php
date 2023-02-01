@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddColumnProviderToProductRatingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
-            $table->string('phone_number')->unique()->change();
+        Schema::table('product_rating', function (Blueprint $table) {
+            $table->foreignId('provider');
         });
     }
 
@@ -25,9 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('providers', function (Blueprint $table) {
-            $table->string('phone_number');
-            $table->dropUnique('providers_phone_number_unique');
-        });   
+        Schema::table('appointment_rating', function (Blueprint $table) {
+            $table->dropForeign('provider');
+        });
     }
-};
+}
