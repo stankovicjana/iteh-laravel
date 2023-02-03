@@ -31,3 +31,9 @@ Route::resource('providers', ProviderController::class);
 Route::resource('apprat', ProductRatingController::class);
 
 Route::resource('users', UserController::class)->only(['index', 'show']);
+
+Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index']);
+
+Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']);
+
+Route::get('/products/{id}/apprat', [ProductAppointmentRatingController::class, 'index']);
