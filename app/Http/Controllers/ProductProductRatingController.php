@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductRating;
 use App\Http\Resources\ProductRatingCollection;
 
-class ProductProductRatinController extends Controller
+class ProductProductRatingController extends Controller
 {
     public function index($product_id)
     {

@@ -28,14 +28,14 @@ Route::middleware('auth:sanctum')->get('/myprofile', function (Request $request)
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //admin
-    Route::resource('services', ServiceController::class)->only(['store', 'update', 'destroy']); //radi
+    Route::resource('products', ProductController::class)->only(['store', 'update', 'destroy']); //radi
     Route::resource('providers', ProviderController::class)->only(['store', 'update', 'destroy']); //radi
     Route::resource('users', UserController::class)->only(['destroy']);  //radi
     Route::post('/register', [AuthController::class, 'register']); //radi
     Route::resource('users', UserController::class)->only(['index', 'show']);  //radi
 
     //user
-    Route::resource('apprat', ProductRatingController::class)->only(['store', 'update', 'destroy']); 
+   // Route::resource('/apprat', ProductRatingController::class)->only(['store', 'update', 'destroy']); //ne radi
 
     //svi loginovani
     Route::post('/logout', [AuthController::class, 'logout']); //radi
@@ -54,11 +54,11 @@ Route::resource('apprat', ProductRatingController::class); // radi
 
 Route::resource('users', UserController::class)->only(['index', 'show']);
 
-Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index']);
+Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index']); //radi
 
-Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']);
+Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']); //radi
 
-Route::get('/products/{id}/apprat', [ProductAppointmentRatingController::class, 'index']);
+Route::get('/products/{id}/apprat', [ProductAppointmentRatingController::class, 'index']); //radi
 
 Route::post('/login', [AuthController::class, 'login']); //radi
 

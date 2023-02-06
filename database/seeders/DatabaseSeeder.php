@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role' => 'admin'
         ]);
+      
 
 
         User::factory(5)->create();
@@ -80,8 +81,8 @@ class DatabaseSeeder extends Seeder
         
         $productRating1 = ProductRating::create([
             'date_and_time' => now(),
-            'user' => 2,
-            'product' => 1,
+            'user' =>3,
+            'product' =>1,
             'provider' => 1,
             'rating' => 5,
             'note' =>  'Savršena kozmetika, probala za sada kremu za lice 45+ i piling za telo. Retko kada mi se desilo da budem oduševljena i zadovoljna kada probam neku novu kremu/liniju kozm. ali sa HOMMAGE sam prezadovoljna. Za svaku preporuku!'
@@ -89,8 +90,8 @@ class DatabaseSeeder extends Seeder
 
         $productRating1 = ProductRating::create([
             'date_and_time' => now(),
-            'user' => 2,
-            'product' => 1,
+            'user' =>4,
+            'product' =>1,
             'provider' => 1,
             'rating' => 5,
             'note' => 'Savršena kozmetika, probala za sada kremu za lice 45+ i piling za telo. Retko kada mi se desilo da budem oduševljena i zadovoljna kada probam neku novu kremu/liniju kozm. ali sa HOMMAGE sam prezadovoljna. Za svaku preporuku!'
@@ -98,8 +99,8 @@ class DatabaseSeeder extends Seeder
 
         $productRating3 = ProductRating::create([
             'date_and_time' => now(),
-            'user' => 8,
-            'product' => 1,
+            'user' =>5,
+            'product' =>1,
             'provider' => 1,
             'rating' => 5,
             'note' => 'Savršena kozmetika, probala za sada kremu za lice 45+ i piling za telo. Retko kada mi se desilo da budem oduševljena i zadovoljna kada probam neku novu kremu/liniju kozm. ali sa HOMMAGE sam prezadovoljna. Za svaku preporuku!'

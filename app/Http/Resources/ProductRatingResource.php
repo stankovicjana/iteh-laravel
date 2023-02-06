@@ -21,8 +21,8 @@ class ProductRatingResource extends JsonResource
     {
         return [
             'date_and_time' => $this->resource->date_and_time,
-            'user' => new UserResource($this->resource->userkey),
-            'product' => new ProductResource($this->resource->productkey),
+            'user' => $this->resource->user,
+            'product' => $this->resource->product,
             'provider' => new ProviderResource($this->resource->providerkey),
             'rating' => $this->resource->rating,
             'note' => $this->resource->note,
