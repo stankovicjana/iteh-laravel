@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProductRatingController;
+use App\Http\Controllers\API\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +21,36 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->get('/myprofile', function (Request $request) {
+    return new UserResource($request->user());
+});
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //admin
+    Route::resource('services', ServiceController::class)->only(['store', 'update', 'destroy']); //radi
+    Route::resource('providers', ProviderController::class)->only(['store', 'update', 'destroy']); //radi
+    Route::resource('users', UserController::class)->only(['destroy']);  //radi
+    Route::post('/register', [AuthController::class, 'register']); //radi
+    Route::resource('users', UserController::class)->only(['index', 'show']);  //radi
+
+    //user
+    Route::resource('apprat', ProductRatingController::class)->only(['store', 'update', 'destroy']); 
+
+    //svi loginovani
+    Route::post('/logout', [AuthController::class, 'logout']); //radi
+    Route::get('/myapprat', [UserProductRatingController::class, 'myapprat']); // radi, proverava da li taj user ima rating
+    Route::resource('users', UserController::class)->only(['update']); 
+
 });
 
 //javne rute
 
-Route::resource('products', ProductController::class)->only(['index', 'show']);
+Route::resource('products', ProductController::class)->only(['index', 'show']); //radi
 
-Route::resource('providers', ProviderController::class);
+Route::resource('providers', ProviderController::class); //radi
 
-Route::resource('apprat', ProductRatingController::class);
+Route::resource('apprat', ProductRatingController::class); // radi
 
 Route::resource('users', UserController::class)->only(['index', 'show']);
 
@@ -37,3 +59,9 @@ Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index
 Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']);
 
 Route::get('/products/{id}/apprat', [ProductAppointmentRatingController::class, 'index']);
+
+Route::post('/login', [AuthController::class, 'login']); //radi
+
+/////////
+
+
