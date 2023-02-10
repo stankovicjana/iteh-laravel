@@ -111,10 +111,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->id != auth()->user()->id && auth()->user()->isAdmin()) {
+        /*if($user->id != auth()->user()->id && auth()->user()->isAdmin()) {}*/
             $user->delete();
             return response()->json('User is deleted successfully.');
-        }
+        
 
         return response()->json('You do not have the privilege to delete user if you are not admin, nor to delete your own account.');
     }

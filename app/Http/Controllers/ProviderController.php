@@ -46,16 +46,16 @@ class ProviderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:150',
-            'phone_number' => 'required|string|max:150|unique:providers',
-            'email' => 'required|email|unique:providers',
+            'phone_number' => 'required|string|max:150|unique:provider',
+            'email' => 'required|email|unique:provider',
         ]);
 
         if ($validator->fails())
             return response()->json($validator->errors());
 
-        if(auth()->user()->isUser())
+        /*if(auth()->user()->isUser())
             return response()->json('You are not authorized to create new providers.');      
-
+        */
         $provider = Provider::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
@@ -98,9 +98,9 @@ class ProviderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:150',
-            'phone_number' => 'required|string|max:150|unique:providers,phone_number,'.$provider->id,
+            'phone_number' => 'required|string|max:150|unique:provider,phone_number,'.$provider->id,
             'years_of_experience' => 'required|numeric|lte:30|gte:1',
-            'email' => 'required|email|unique:providers,email,'.$provider->id,
+            'email' => 'required|email|unique:provider,email,'.$provider->id,
         ]);
 
         if ($validator->fails())

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Controllers\API\AuthController;
 use App\Models\ProductRating;
 use App\Models\Provider;
 use App\Models\Product;
@@ -91,14 +90,14 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:150|unique:product,name,' .$product->id,
+            'name' => 'required|string|max:150|unique:products,name,' .$product->id,
         ]);
 
         if ($validator->fails())
             return response()->json($validator->errors());
 
         if(auth()->user()->isUser())
-            return response()->json('You are not authorized to update products.');    
+            return response()->json('You are not authorized to update product.');    
 
         $product->name = $request->name;
     
@@ -117,14 +116,14 @@ class ProductController extends Controller
     {
 
         if(auth()->user()->isUser())
-            return response()->json('You are not authorized to delete products.'); 
+            return response()->json('You are not authorized to delete product.'); 
 
-        $apprat = ProductRating::get()->where('product', $product->id);
+        $apprat = ProductRating::get()->where('product', $service->id);
         if (count($apprat) > 0)
-            return response()->json('You cannot delete products that have product ratings.');
+            return response()->json('You cannot delete product that have product ratings.');
 
-        $product->delete();
+        $service->delete();
 
-        return response()->json('Product is deleted successfully.');
+        return response()->json('product is deleted successfully.');
     }
 }

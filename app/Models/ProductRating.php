@@ -17,11 +17,11 @@ class ProductRating extends Model{
     public $primaryKey = 'id';
 
     public function userkey() {
-        return $this->belongsTo(User::class, 'users');
+        return $this->belongsTo(User::class, 'user');
     }
 
-    public function servicekey() {
-        return $this->belongsTo(Service::class, 'service');
+    public function productkey() {
+        return $this->belongsTo(Product::class, 'product');
     }
 
     public function providerkey() {
