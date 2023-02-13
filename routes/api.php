@@ -2,12 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\ProductProductRatingController;
+use App\Http\Controllers\ProviderProductRatingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProductRatingController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\ProductRatingController;
 
 
 /*
@@ -26,16 +28,15 @@ Route::middleware('auth:sanctum')->get('/myprofile', function (Request $request)
 });
 
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => ['auth:sanctum']], function () {
     //admin
-    Route::resource('products', ProductController::class)->only(['store', 'update', 'destroy']); //radi
-    Route::resource('providers', ProviderController::class)->only(['store', 'update', 'destroy']); //radi
-    Route::resource('users', UserController::class)->only(['destroy']);  //radi
-    Route::post('/register', [AuthController::class, 'register']); //radi
-    Route::resource('users', UserController::class)->only(['index', 'show']);  //radi
 
-    //user
-   // Route::resource('/apprat', ProductRatingController::class)->only(['store', 'update', 'destroy']); //ne radi
+    Route::resource('products', ProductController::class)->only(['store']); 
+    Route::resource('providers', 'App\Http\Controllers\ProviderController')->only(['store' ]); 
+
+    Route::post('/register', [AuthController::class, 'register']); //radi
+    //vraca sve usere, get metoda
+    Route::resource('users', UserController::class)->only(['index', 'show']);  //radi
 
     //svi loginovani
     Route::post('/logout', [AuthController::class, 'logout']); //radi
@@ -44,21 +45,30 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 });
 
+//admin
+Route::put('products/{id}', 'App\Http\Controllers\ProductController@update');
+Route::delete('products/{id}', 'App\Http\Controllers\ProductController@destroy');
+Route::put('users/{id}', 'UserController@update');
+Route::delete('users/{id}', 'UserController@destroy');
+
+
 //javne rute
 
+//vraca sve proizvode, get
 Route::resource('products', ProductController::class)->only(['index', 'show']); //radi
-
+//vraca sve providere, get
 Route::resource('providers', ProviderController::class); //radi
-
+//vraca sve ocene, get
 Route::resource('apprat', ProductRatingController::class); // radi
-
+//vraca sve usere, get metoda
 Route::resource('users', UserController::class)->only(['index', 'show']);
 
-Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index']); //radi
+//vraca za odredjenog usera koje je ocene ostavio, get metoda
+Route::get('/users/{id}/apprat', [UserProductRatingController::class, 'index']); //radi
 
-Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']); //radi
+Route::get('/providers/{id}/apprat', [ProviderProductRatingController::class, 'index']); //radi
 
-Route::get('/products/{id}/apprat', [ProductAppointmentRatingController::class, 'index']); //radi
+Route::get('/products/{id}/apprat', [ProductProductRatingController::class, 'index']); //radi
 
 Route::post('/login', [AuthController::class, 'login']); //radi
 

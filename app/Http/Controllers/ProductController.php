@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Controllers\API\AuthController;
 use App\Models\ProductRating;
 use App\Models\Provider;
 use App\Models\Product;

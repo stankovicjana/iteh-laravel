@@ -112,7 +112,7 @@ class ProductRatingController extends Controller
 
         if(auth()->user()->isAdmin())
             return response()->json('You are not authorized to update product ratings.');    
-            
+
         if(auth()->user()->id != $apprat->user)
             return response()->json('You are not authorized to update someone elses product ratings.');     
 
@@ -124,7 +124,7 @@ class ProductRatingController extends Controller
         $apprat->provider = $request->provider;
 
         $apprat->save();
-        
+
         return response()->json(['Product rating is updated successfully.', new ProductRatingResource($apprat)]);
     }
 
@@ -139,7 +139,7 @@ class ProductRatingController extends Controller
 
         if(auth()->user()->isAdmin())
             return response()->json('You are not authorized to delete product ratings.');    
-            
+
         if(auth()->user()->id != $apprat->user)
             return response()->json('You are not authorized to delete someone elses product ratings.');
 
